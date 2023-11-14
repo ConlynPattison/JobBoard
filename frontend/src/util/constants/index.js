@@ -1,2 +1,3 @@
-export const API_URL = "https://findwork.dev/api/jobs/";
-export const API_KEY = "eea7f2e12d243882d99d48666078c2d3a95d6c7b"
+export const API_URL = "https://jsearch.p.rapidapi.com/search";
+export const API_KEY = "d6f283f8c4msh64ea8d8b52c9025p1878c0jsne537dd7faef5";
+export const SERVER_URL = "http://localhost:8081";

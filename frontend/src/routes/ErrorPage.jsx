@@ -1,4 +1,4 @@
-import { Box, Center, Flex, Heading } from "@chakra-ui/layout";
+import { Center, Flex, Heading } from "@chakra-ui/layout";
 import { useRouteError } from "react-router";
 
 // TODO:

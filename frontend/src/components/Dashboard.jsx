@@ -39,9 +39,10 @@ const Dashboard = () => {
 
 	return <>
 		<Search submitSearch={searchJobs} />
-		<Box>{jobResults.length > 0 ?
-			<ResultContainer jobResults={jobResults} /> :
-			""}</Box>
+		<Box>
+			{jobResults.length > 0 ?
+				<ResultContainer jobResults={jobResults} /> : ""}
+		</Box>
 	</>;
 };
 
