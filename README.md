@@ -1,15 +1,15 @@
 # JobBoard - SWE Final Project
 
 ## Requirements:
-- REST backend using Spring Boot
-  - Spring Boot JPA
-  - Spring Boot JWT Security
-  - Spring REST Template call to external REST service
-- Testing
-  - JUnit test for each REST API method
-  - Minimum of one End-to-End system test using Selenium
-- React front end
-- Deployed to AWS
+- [ ] REST backend using Spring Boot
+  - [ ] Spring Boot JPA
+  - [ ] Spring Boot JWT Security
+  - [ ] Spring REST Template call to external REST service
+- [ ] Testing
+  - [ ] JUnit test for each REST API method
+  - [ ] Minimum of one End-to-End system test using Selenium
+- [ ] React front end
+- [ ] Deployed to AWS
 
 ## Contribution Helpers
 1. Please use descriptive developement branch names
