@@ -14,7 +14,7 @@ const SearchButton = ({ submitSearch }) => {
  * TODO: Get another API for CITY, STATE and CITY, COUNTRY combinations for the dropdown/search for locations
  */
 const DemoPage = () => {
-	const [data, setData] = useState([]);
+	const [jobResults, setJobResults] = useState([]);
 
 	const searchJobs = async () => {
 		// TODO: This API request should be one to OUR server, the server will call the jsearch API endpoint and respond to here with that data
@@ -35,7 +35,7 @@ const DemoPage = () => {
 		try {
 			const { data } = await axios.request(options);
 			console.log(data);
-			setData(data.data);
+			setJobResults(data.data);
 		} catch (error) {
 			console.error(error);
 		}
@@ -43,8 +43,8 @@ const DemoPage = () => {
 
 	return <>
 		<SearchButton submitSearch={searchJobs} />
-		<Box>{data.length > 0 ?
-			<ResultContainer jobResults={data} /> :
+		<Box>{jobResults.length > 0 ?
+			<ResultContainer jobResults={jobResults} /> :
 			""}</Box>
 	</>;
 };

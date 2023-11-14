@@ -11,7 +11,7 @@ const JobCard = ({ jobData }) => {
                 height={100}
             />
             <Stack mt='6' spacing='3'>
-                <Heading size='md'>{jobData.job_title}</Heading>
+                <Heading size='md' noOfLines={1}>{jobData.job_title}</Heading>
                 <Text noOfLines={4}>
                     {/* Holds the Description */}
                     {jobData.job_description}
