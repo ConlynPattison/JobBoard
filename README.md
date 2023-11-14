@@ -19,7 +19,7 @@
 
 ### Docs
 **API(s) used**
-- Job Search Results: [FindWork](https://findwork.dev/developers/)
+- Job Search Results: [JSearch](https://rapidapi.com/letscrape-6bRBa3QguO5/api/jsearch)
 
 ## Contributors
 - Randy Rodriguez
