@@ -16,29 +16,29 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class LoginController {
-	@Autowired
-	private JwtService jwtService;
+    @Autowired
+    private JwtService jwtService;
 
-	@Autowired	
-	AuthenticationManager authenticationManager;
+    @Autowired
+    AuthenticationManager authenticationManager;
 
-	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public ResponseEntity<?> getToken(@RequestBody AccountCredentials credentials) {
-		UsernamePasswordAuthenticationToken creds =
-				new UsernamePasswordAuthenticationToken(
-						credentials.username(),
-						credentials.password());
+    @RequestMapping(value = "/api/login", method = RequestMethod.POST)
+    public ResponseEntity<?> getToken(@RequestBody AccountCredentials credentials) {
+        UsernamePasswordAuthenticationToken creds =
+                new UsernamePasswordAuthenticationToken(
+                        credentials.username(),
+                        credentials.password());
 
-		Authentication auth = authenticationManager.authenticate(creds);
+        Authentication auth = authenticationManager.authenticate(creds);
 
-		// Generate token
-		String jwts = jwtService.getToken(auth.getName());
+        // Generate token
+        String jwts = jwtService.getToken(auth.getName());
 
-		// Build response with the generated token
-		return ResponseEntity.ok()
-				.header(HttpHeaders.AUTHORIZATION, "Bearer " + jwts)
-				.header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "Authorization")
-				.build();
+        // Build response with the generated token
+        return ResponseEntity.ok()
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwts)
+                .header(HttpHeaders.ACCESS_CONTROL_EXPOSE_HEADERS, "Authorization")
+                .build();
 
-	}
+    }
 }

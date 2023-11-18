@@ -14,7 +14,7 @@ const LoginPage = ({ setAuth }) => {
 
 	const login = () => {
 		// attempt login by sending request to Spring server with credentials object (user)
-		fetch(`${SERVER_URL}/login`, {
+		fetch('/api/login', {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify(user),
