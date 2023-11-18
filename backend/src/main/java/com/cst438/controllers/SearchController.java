@@ -24,6 +24,7 @@ public class SearchController {
         String numPages = "1";
 
         HttpHeaders headers = new HttpHeaders();
+        // todo: externalize these key-values to some type of environment variable
         headers.set("X-RapidAPI-Key", "d6f283f8c4msh64ea8d8b52c9025p1878c0jsne537dd7faef5");
         headers.set("X-RapidAPI-Host", "jsearch.p.rapidapi.com");
 
