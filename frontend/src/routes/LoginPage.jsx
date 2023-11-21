@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { SERVER_URL } from "../util/constants";
 import { useNavigate } from "react-router-dom";
 
-const LoginPage = ({ setAuth }) => {
+const LoginPage = () => {
 	const [user, setUser] = useState({ username: "", password: "" });
 	const navigate = useNavigate();
 
@@ -24,7 +23,6 @@ const LoginPage = ({ setAuth }) => {
 				console.log(jwtToken);
 				if (jwtToken != null) {
 					sessionStorage.setItem("token", jwtToken);
-					// setAuth(true);
 					navigate("/");
 				}
 			})
