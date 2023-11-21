@@ -1,5 +1,6 @@
 import { Wrap, WrapItem } from "@chakra-ui/react";
 import JobCard from "./JobCard";
+import React from "react";
 
 
 const ResultContainer = ({ jobResults }) => {

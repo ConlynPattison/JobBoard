@@ -2,6 +2,7 @@ import { useNavigate } from "react-router";
 import Dashboard from "../components/Dashboard"
 import { useEffect } from "react";
 import NavHeaders from "../components/NavHeader";
+import React from "react";
 
 // TODO: Should hold the Header, Dashboard, and Footer components
 const HomePage = () => {

@@ -1,4 +1,5 @@
 import { Button } from "@chakra-ui/button";
+import React from "react";
 
 // TODO: Will eventually include search bar, select elements, and submission confirmation checks
 const Search = ({ submitSearch }) => {
