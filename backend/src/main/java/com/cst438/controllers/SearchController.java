@@ -30,9 +30,6 @@ public class SearchController {
         // todo: externalize these key-values to some type of environment variable
         headers.set("X-RapidAPI-Key", "d6f283f8c4msh64ea8d8b52c9025p1878c0jsne537dd7faef5");
         headers.set("X-RapidAPI-Host", "jsearch.p.rapidapi.com");
-        System.out.println(query);
-        if (employmentTypes != null)
-            System.out.println(employmentTypes);
 
         // Build the URI with parameters
         URI uri;
