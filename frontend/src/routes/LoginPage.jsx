@@ -30,11 +30,9 @@ const LoginPage = () => {
 						token: jwtToken
 					});
 					navigate("/");
-				} else {
-					console.log("should not be here")
 				}
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => console.error(err));
 	};
 
 	return (

@@ -5,7 +5,7 @@ import React from "react";
 
 const ResultContainer = ({ jobResults }) => {
 	return (
-		<Wrap>
+		<Wrap p={5}>
 			{jobResults.length > 0 ?
 				jobResults.map((result) => {
 					return (

@@ -15,7 +15,6 @@ import axios from "axios";
 
 const SearchPanel = ({ setResults }) => {
 	const [searchQuery, setQuery] = useState("");
-	const [location, setLocation] = useState("");
 	const [datePosted, setDatePosted] = useState("all");
 	const [employmentType, setEmploymentType] = useState([]);
 	const [employmentTypes, setEmploymentTypes] = useState("");
@@ -49,7 +48,6 @@ const SearchPanel = ({ setResults }) => {
 				},
 				params: {
 					query: searchQuery,
-					...location && { location },
 					...employmentTypes && { employmentTypes },
 					datePosted,
 				}
@@ -62,13 +60,12 @@ const SearchPanel = ({ setResults }) => {
 
 	return (
 		<Box flex="30%">
-			<Stack>
+			<Stack spacing={5} p={5}>
 				<Button onClick={searchJobs} variant="solid" colorScheme="blue"> Search </Button>
 				<label htmlFor="search-input">Job Search Query<Input id="search-input" onChange={(e) => setQuery(e.target.value)} /></label>
-				<label htmlFor="location-input">Location<Input id="location-input" onChange={(e) => setLocation(e.target.value)} /></label>
 				<label htmlFor="date-posted-radio">Date Posted
 					<RadioGroup id="date-posted-radio" onChange={setDatePosted} value={datePosted}>
-						<Stack direction="row">
+						<Stack direction="column">
 							<Radio value="all" checked>Anytime</Radio>
 							<Radio value="today">Today</Radio>
 							<Radio value="3days">3 Days</Radio>
@@ -79,7 +76,7 @@ const SearchPanel = ({ setResults }) => {
 				</label>
 				<label htmlFor="employement-type-radio">Employment Type
 					<CheckboxGroup id="employement-type-radio" onChange={setEmploymentType} value={employmentType}>
-						<Stack direction="row">
+						<Stack direction="column">
 							<Checkbox value="" defaultChecked isChecked={employmentType.length === 0} disabled={employmentType.length > 0}>All</Checkbox>
 							<Checkbox value="FULLTIME">Full Time</Checkbox>
 							<Checkbox value="CONTRACTOR">Contractor</Checkbox>
