@@ -20,7 +20,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-	const { user, login, logout, setUser } = useAuth();
+	const { user, setUser } = useAuth();
 
 	return (
 		<ChakraProvider>

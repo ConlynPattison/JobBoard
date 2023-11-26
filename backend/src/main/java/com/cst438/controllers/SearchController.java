@@ -6,20 +6,23 @@ import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Optional;
 
 @RestController
 public class SearchController {
 
     // todo: remove the hard-coded values and sub them for Optionals from query params
     @RequestMapping(value = "/api/search", method = RequestMethod.GET)
-    public ResponseEntity<String> getResult() {
+    public ResponseEntity<String> getResult(@RequestParam (name="query", required = true) String query,
+                                            @RequestParam (name="datePosted", required = true) String datePosted,
+                                            @RequestParam (name="employmentTypes", required = false) String employmentTypes) {
         String apiUrl = "https://jsearch.p.rapidapi.com/search";
-        String query = "Python developer in Texas, USA";
         String page = "1";
         String numPages = "1";
 
@@ -27,6 +30,9 @@ public class SearchController {
         // todo: externalize these key-values to some type of environment variable
         headers.set("X-RapidAPI-Key", "d6f283f8c4msh64ea8d8b52c9025p1878c0jsne537dd7faef5");
         headers.set("X-RapidAPI-Host", "jsearch.p.rapidapi.com");
+        System.out.println(query);
+        if (employmentTypes != null)
+            System.out.println(employmentTypes);
 
         // Build the URI with parameters
         URI uri;
@@ -35,6 +41,8 @@ public class SearchController {
                     .queryParam("query", query)
                     .queryParam("page", page)
                     .queryParam("num_pages", numPages)
+                    .queryParam("date_posted", datePosted)
+                    .queryParamIfPresent("employment_types", Optional.ofNullable(employmentTypes))
                     .build()
                     .toUri();
         } catch (Exception e) {

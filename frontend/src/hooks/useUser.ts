@@ -1,6 +1,7 @@
 // Source: https://dayvster.com/blog/use-context-for-auth
-import { useContext, useState } from "react";
-import { AuthContext } from "../context/AuthContext.tsx";
+// Change from source: [user, setUser] = useState rather than referring back to {...} =  useContext(AuthContext) ...
+// old version never referred to a setUser function, user never changed in context
+import { useState } from "react";
 import { useSessionStorage } from "./useSessionStorage.ts";
 
 // NOTE: optimally move this into a separate file

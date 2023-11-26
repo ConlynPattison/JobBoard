@@ -11,51 +11,65 @@ import {
 } from "@chakra-ui/react";
 import { useAuth } from '../hooks/useAuth.ts';
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const SearchPanel = ({ setResults }) => {
-	const [query, setQuery] = useState("");
+	const [searchQuery, setQuery] = useState("");
 	const [location, setLocation] = useState("");
 	const [datePosted, setDatePosted] = useState("all");
 	const [employmentType, setEmploymentType] = useState([]);
+	const [employmentTypes, setEmploymentTypes] = useState("");
 	const { user } = useAuth();
 	const navigate = useNavigate();
 
+	useEffect(() => {
+		setEmploymentTypes(() => {
+			if (employmentType.length === 0)
+				return "";
+			const employmentTypes = employmentType.reduce((prev, curr, index) => {
+				if (index === 0)
+					return `${curr}`;
+				return `${prev},${curr}`;
+			})
+			return employmentTypes;
+		})
+	}, [employmentType]);
+
+
+
 	const searchJobs = async () => {
-		console.log(user)
 		if (!user) {
 			navigate("/login");
 			return;
 		}
-
-		//TODO: send info as body in backend fetch call
 		try {
-			const response = await fetch('/api/search', {
+			const { data } = await axios.get('/api/search', {
 				headers: {
-					Authorization: user?.token || ""
+					Authorization: user?.token || "",
+				},
+				params: {
+					query: searchQuery,
+					...location && { location },
+					...employmentTypes && { employmentTypes },
+					datePosted,
 				}
 			});
-			const data = await response.json();
-			console.log(data);
 			setResults(data?.data);
 		} catch (error) {
 			console.error(error);
 		}
 	};
 
-	useEffect(() => {
-		console.log(employmentType);
-	}, [employmentType])
-
 	return (
 		<Box flex="30%">
 			<Stack>
 				<Button onClick={searchJobs} variant="solid" colorScheme="blue"> Search </Button>
-				<label htmlFor="search-input">Job Search Query<Input id="search-input" onChange={setQuery} /></label>
-				<label htmlFor="location-input">Location<Input id="location-input" onChange={setLocation} /></label>
+				<label htmlFor="search-input">Job Search Query<Input id="search-input" onChange={(e) => setQuery(e.target.value)} /></label>
+				<label htmlFor="location-input">Location<Input id="location-input" onChange={(e) => setLocation(e.target.value)} /></label>
 				<label htmlFor="date-posted-radio">Date Posted
 					<RadioGroup id="date-posted-radio" onChange={setDatePosted} value={datePosted}>
 						<Stack direction="row">
-							<Radio value="all" checked>All</Radio>
+							<Radio value="all" checked>Anytime</Radio>
 							<Radio value="today">Today</Radio>
 							<Radio value="3days">3 Days</Radio>
 							<Radio value="week">Week</Radio>
@@ -66,10 +80,10 @@ const SearchPanel = ({ setResults }) => {
 				<label htmlFor="employement-type-radio">Employment Type
 					<CheckboxGroup id="employement-type-radio" onChange={setEmploymentType} value={employmentType}>
 						<Stack direction="row">
-							<Checkbox value="" defaultChecked>All</Checkbox>
+							<Checkbox value="" defaultChecked isChecked={employmentType.length === 0} disabled={employmentType.length > 0}>All</Checkbox>
 							<Checkbox value="FULLTIME">Full Time</Checkbox>
+							<Checkbox value="CONTRACTOR">Contractor</Checkbox>
 							<Checkbox value="PARTTIME">Part Time</Checkbox>
-							<Checkbox value="CONTACTOR">Contractor</Checkbox>
 							<Checkbox value="INTERN">Intern</Checkbox>
 						</Stack>
 					</CheckboxGroup>
