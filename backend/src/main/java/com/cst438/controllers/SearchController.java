@@ -19,9 +19,9 @@ public class SearchController {
 
     // todo: remove the hard-coded values and sub them for Optionals from query params
     @RequestMapping(value = "/api/search", method = RequestMethod.GET)
-    public ResponseEntity<String> getResult(@RequestParam (name="query", required = true) String query,
-                                            @RequestParam (name="datePosted", required = true) String datePosted,
-                                            @RequestParam (name="employmentTypes", required = false) String employmentTypes) {
+    public ResponseEntity<String> getResult(@RequestParam(name = "query", required = true) String query,
+                                            @RequestParam(name = "datePosted", required = true) String datePosted,
+                                            @RequestParam(name = "employmentTypes", required = false) String employmentTypes) {
         String apiUrl = "https://jsearch.p.rapidapi.com/search";
         String page = "1";
         String numPages = "1";
