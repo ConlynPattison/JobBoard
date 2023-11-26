@@ -24,6 +24,8 @@
 - [ ] React front end
 - [ ] Deployed to AWS
 
+_See Pivotal Tracker project for specifics on requirements and stories._
+
 ## Contribution Helpers
 1. Please use descriptive developement branch names
     - i.e. rather than /dev use /dev-\<my_issue>
