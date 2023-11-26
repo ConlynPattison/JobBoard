@@ -16,7 +16,7 @@ import java.net.URI;
 public class SearchController {
 
     // todo: remove the hard-coded values and sub them for Optionals from query params
-    @RequestMapping(value = "/api/test", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/search", method = RequestMethod.GET)
     public ResponseEntity<String> getResult() {
         String apiUrl = "https://jsearch.p.rapidapi.com/search";
         String query = "Python developer in Texas, USA";

@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth.ts";
 
+// TODO: Convert to a clean Chakra implementation
 const LoginPage = () => {
-	const [user, setUser] = useState({ username: "", password: "" });
+	const [userCred, setUserCred] = useState({ username: "", password: "" });
 	const navigate = useNavigate();
 	const { login } = useAuth();
 
 	const onChange = (e) => {
-		setUser((prev) => {
+		setUserCred((prev) => {
 			return { ...prev, [e.target.name]: e.target.value };
 		});
 	};
@@ -18,18 +19,19 @@ const LoginPage = () => {
 		fetch('/api/login', {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(user),
+			body: JSON.stringify(userCred),
 		})
 			.then((res) => {
 				const jwtToken = res.headers.get("Authorization");
-				console.log(jwtToken);
 				if (jwtToken != null) {
 					login({
-						username: user.username,
+						username: userCred.username,
 						email: "TODO:",
 						token: jwtToken
 					});
 					navigate("/");
+				} else {
+					console.log("should not be here")
 				}
 			})
 			.catch((err) => console.log(err));
@@ -48,7 +50,7 @@ const LoginPage = () => {
 								<input
 									type="text"
 									name="username"
-									value={user.username}
+									value={userCred.username}
 									onChange={onChange}
 								/>
 							</td>
@@ -61,7 +63,7 @@ const LoginPage = () => {
 								<input
 									type="password"
 									name="password"
-									value={user.password}
+									value={userCred.password}
 									onChange={onChange}
 								/>
 							</td>

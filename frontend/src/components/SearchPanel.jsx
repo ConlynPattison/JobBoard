@@ -9,22 +9,29 @@ import {
 	Checkbox,
 	CheckboxGroup,
 } from "@chakra-ui/react";
+import { useAuth } from '../hooks/useAuth.ts';
+import { useNavigate } from "react-router-dom";
 
 const SearchPanel = ({ setResults }) => {
 	const [query, setQuery] = useState("");
 	const [location, setLocation] = useState("");
 	const [datePosted, setDatePosted] = useState("all");
 	const [employmentType, setEmploymentType] = useState([]);
+	const { user } = useAuth();
+	const navigate = useNavigate();
 
 	const searchJobs = async () => {
+		console.log(user)
+		if (!user) {
+			navigate("/login");
+			return;
+		}
+
 		//TODO: send info as body in backend fetch call
 		try {
-			const response = await fetch('/api/test', {
-				body: {
-
-				},
+			const response = await fetch('/api/search', {
 				headers: {
-					Authorization: sessionStorage.getItem("token")
+					Authorization: user?.token || ""
 				}
 			});
 			const data = await response.json();

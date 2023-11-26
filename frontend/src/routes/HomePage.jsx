@@ -6,13 +6,12 @@ import React from "react";
 
 // TODO: Should hold the Header, Dashboard, and Footer components
 const HomePage = () => {
-	const navigate = useNavigate();
-
-	useEffect(() => {
-		if (sessionStorage.getItem("token") == null) {
-			navigate("/login");
-		}
-	})
+	// Don't want to be navigated away if not logged in (should instead show login button and then be navigated)
+	// useEffect(() => {
+	// 	if (sessionStorage.getItem("token") == null) {
+	// 		navigate("/login");
+	// 	}
+	// })
 
 	return (
 		<>
