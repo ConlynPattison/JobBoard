@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth.ts";
 
 const LoginPage = () => {
 	const [user, setUser] = useState({ username: "", password: "" });
 	const navigate = useNavigate();
+	const { login } = useAuth();
 
 	const onChange = (e) => {
 		setUser((prev) => {
@@ -11,7 +13,7 @@ const LoginPage = () => {
 		});
 	};
 
-	const login = () => {
+	const submitLogin = () => {
 		// attempt login by sending request to Spring server with credentials object (user)
 		fetch('/api/login', {
 			method: "POST",
@@ -22,7 +24,11 @@ const LoginPage = () => {
 				const jwtToken = res.headers.get("Authorization");
 				console.log(jwtToken);
 				if (jwtToken != null) {
-					sessionStorage.setItem("token", jwtToken);
+					login({
+						username: user.username,
+						email: "TODO:",
+						token: jwtToken
+					});
 					navigate("/");
 				}
 			})
@@ -64,7 +70,7 @@ const LoginPage = () => {
 				</table>
 
 				<br />
-				<button id="login-submit" onClick={login}>
+				<button id="login-submit" onClick={submitLogin}>
 					Login
 				</button>
 			</div>

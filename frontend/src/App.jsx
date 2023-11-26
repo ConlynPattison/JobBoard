@@ -3,6 +3,8 @@ import HomePage from "./routes/HomePage";
 import ErrorPage from "./routes/ErrorPage";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import LoginPage from "./routes/LoginPage";
+import { AuthContext } from "./context/AuthContext.tsx";
+import { useAuth } from "./hooks/useAuth.ts";
 
 
 const router = createBrowserRouter([
@@ -15,12 +17,16 @@ const router = createBrowserRouter([
 		path: "login",
 		element: <LoginPage />
 	}
-])
+]);
 
 function App() {
+	const { user, login, logout, setUser } = useAuth();
+
 	return (
 		<ChakraProvider>
-			<RouterProvider router={router} />
+			<AuthContext.Provider value={{ user, setUser }}>
+				<RouterProvider router={router} />
+			</AuthContext.Provider>
 		</ChakraProvider>
 	);
 }

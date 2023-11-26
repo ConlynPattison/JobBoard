@@ -19,7 +19,14 @@ const SearchPanel = ({ setResults }) => {
 	const searchJobs = async () => {
 		//TODO: send info as body in backend fetch call
 		try {
-			const response = await fetch('/api/test');
+			const response = await fetch('/api/test', {
+				body: {
+
+				},
+				headers: {
+					Authorization: sessionStorage.getItem("token")
+				}
+			});
 			const data = await response.json();
 			console.log(data);
 			setResults(data?.data);

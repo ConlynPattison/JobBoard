@@ -2,7 +2,8 @@
   "compilerOptions": {
     "jsx": "react",
     "module": "CommonJS",
-    "target": "ES6"
+    "target": "ES6",
+    "allowImportingTsExtensions": true
   },
   "include": ["src/**/*"]
 }
