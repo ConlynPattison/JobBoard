@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import { Box } from "@chakra-ui/layout";
+import styles from "./Dashboard.module.css"
+import { Box, Flex } from "@chakra-ui/layout";
 import ResultContainer from "./JobResults/ResultContainer";
 import Search from "./Search";
+import SearchPanel from "./SearchPanel";
 
 /**
  * TODO: Create form elements for adding parameters to the search requests
@@ -11,23 +13,15 @@ import Search from "./Search";
 const Dashboard = () => {
 	const [jobResults, setJobResults] = useState([]);
 
-	const searchJobs = async () => {
-		try {
-			const response = await fetch('/api/test');
-			const data = await response.json();
-			console.log(data);
-			setJobResults(data?.data);
-		} catch (error) {
-			console.error(error);
-		}
-	};
-
 	return <>
-		<Search submitSearch={searchJobs} />
-		<Box>
-			{jobResults.length > 0 ?
-				<ResultContainer jobResults={jobResults} /> : ""}
-		</Box>
+		<Flex className={styles.dashboardParent}>
+			{/* <Search submitSearch={searchJobs} /> */}
+			<SearchPanel setResults={setJobResults} />
+			<Box flex="70%">
+				{jobResults.length > 0 ?
+					<ResultContainer jobResults={jobResults} /> : ""}
+			</Box>
+		</Flex>
 	</>;
 };
 
