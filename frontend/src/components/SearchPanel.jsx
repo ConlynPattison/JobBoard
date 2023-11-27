@@ -8,6 +8,8 @@ import {
 	Stack,
 	Checkbox,
 	CheckboxGroup,
+	FormErrorMessage,
+	FormControl
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -16,29 +18,32 @@ import { useAuth } from '../hooks/useAuth.ts';
 const SearchPanel = ({ setResults }) => {
 	const [searchQuery, setQuery] = useState("");
 	const [datePosted, setDatePosted] = useState("all");
-	const [employmentType, setEmploymentType] = useState([]);
+	const [unformattedTypes, setUnformattedTypes] = useState([]);
 	const [employmentTypes, setEmploymentTypes] = useState("");
+	const [isValidQuery, setIsValidQuery] = useState(true);
 	const { user } = useAuth();
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		setEmploymentTypes(() => {
-			if (employmentType.length === 0)
+			if (unformattedTypes.length === 0)
 				return "";
-			const employmentTypes = employmentType.reduce((prev, curr, index) => {
+			const employmentTypes = unformattedTypes.reduce((prev, curr, index) => {
 				if (index === 0)
 					return `${curr}`;
 				return `${prev},${curr}`;
 			})
 			return employmentTypes;
 		})
-	}, [employmentType]);
-
-
+	}, [unformattedTypes]);
 
 	const searchJobs = async () => {
 		if (!user) {
 			navigate("/login");
+			return;
+		}
+		if (searchQuery.length === 0) {
+			setIsValidQuery(false);
 			return;
 		}
 		try {
@@ -58,11 +63,26 @@ const SearchPanel = ({ setResults }) => {
 		}
 	};
 
+	const handleSearchChange = (e) => {
+		setQuery(() => {
+			if (e.target.value.length !== 0) {
+				setIsValidQuery(true);
+			}
+			return e.target.value;
+		})
+	}
+
 	return (
 		<Box flex="30%">
 			<Stack spacing={5} p={5}>
 				<Button onClick={searchJobs} variant="solid" colorScheme="blue"> Search </Button>
-				<label htmlFor="search-input">Job Search Query<Input id="search-input" onChange={(e) => setQuery(e.target.value)} /></label>
+				<FormControl isInvalid={!isValidQuery}>
+					<label htmlFor="search-input">Job Search Query
+						<Input id="search-input" onFocus={() => { }} errorBorderColor='red.300' onChange={handleSearchChange} />
+						{!isValidQuery &&
+							<FormErrorMessage>Search query is required.</FormErrorMessage>}
+					</label>
+				</FormControl>
 				<label htmlFor="date-posted-radio">Date Posted
 					<RadioGroup id="date-posted-radio" onChange={setDatePosted} value={datePosted}>
 						<Stack direction="column">
@@ -75,9 +95,9 @@ const SearchPanel = ({ setResults }) => {
 					</RadioGroup>
 				</label>
 				<label htmlFor="employement-type-radio">Employment Type
-					<CheckboxGroup id="employement-type-radio" onChange={setEmploymentType} value={employmentType}>
+					<CheckboxGroup id="employement-type-radio" onChange={setUnformattedTypes} value={unformattedTypes}>
 						<Stack direction="column">
-							<Checkbox value="" defaultChecked isChecked={employmentType.length === 0} disabled={employmentType.length > 0}>All</Checkbox>
+							<Checkbox value="" defaultChecked isChecked={unformattedTypes.length === 0} disabled={unformattedTypes.length > 0}>All</Checkbox>
 							<Checkbox value="FULLTIME">Full Time</Checkbox>
 							<Checkbox value="CONTRACTOR">Contractor</Checkbox>
 							<Checkbox value="PARTTIME">Part Time</Checkbox>
