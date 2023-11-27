@@ -1,8 +1,9 @@
 // Source: https://dayvster.com/blog/use-context-for-auth
 // Change from source: [user, setUser] = useState rather than referring back to {...} =  useContext(AuthContext) ...
 // old version never referred to a setUser function, user never changed in context
-import { useState } from "react";
+import { useContext } from "react";
 import { useSessionStorage } from "./useSessionStorage.ts";
+import { AuthContext } from "../context/AuthContext.tsx";
 
 // NOTE: optimally move this into a separate file
 export interface User {
@@ -12,7 +13,7 @@ export interface User {
 }
 
 export const useUser = () => {
-  const [user, setUser] = useState(null);
+  const { user, setUser } = useContext(AuthContext);
   const { setItem } = useSessionStorage();
 
   const addUser = (user: User) => {

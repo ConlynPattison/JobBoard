@@ -5,6 +5,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import LoginPage from "./routes/LoginPage";
 import { AuthContext } from "./context/AuthContext.tsx";
 import { useAuth } from "./hooks/useAuth.ts";
+import { useState } from "react";
 
 
 const router = createBrowserRouter([
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-	const { user, setUser } = useAuth();
+	const [user, setUser] = useState(null);
 
 	return (
 		<ChakraProvider>

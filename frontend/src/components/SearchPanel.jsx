@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import {
 	Box,
 	Button,
@@ -9,9 +9,9 @@ import {
 	Checkbox,
 	CheckboxGroup,
 } from "@chakra-ui/react";
-import { useAuth } from '../hooks/useAuth.ts';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from '../hooks/useAuth.ts';
 
 const SearchPanel = ({ setResults }) => {
 	const [searchQuery, setQuery] = useState("");

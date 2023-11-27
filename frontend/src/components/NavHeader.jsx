@@ -1,15 +1,16 @@
 import { Image, Button, Box, Flex, Divider } from "@chakra-ui/react"
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth.ts";
 
 // TODO: should include the Link components that allow for reaching the Login route (at minimum) and HomePage
 // left (logo), right (notification icon, profile icon)
 const NavHeaders = () => {
 	const navigate = useNavigate();
-	const userLoggedIn = sessionStorage.getItem("token") !== null;
+	const { user, logout } = useAuth();
 
 	const handleBellClick = () => {
-		if (!userLoggedIn) {
+		if (!user) {
 			navigate("/login");
 		} else {
 			// TODO: show the modal with suggested job listings
@@ -17,7 +18,7 @@ const NavHeaders = () => {
 	}
 
 	const handleProfileClick = () => {
-		if (!userLoggedIn) {
+		if (!user) {
 			navigate("/login");
 		} else {
 			// TODO: show the modal with profile information and sign-out button
@@ -30,6 +31,8 @@ const NavHeaders = () => {
 				<Flex alignItems="center" w="full">
 					<Button><Image onClick={() => navigate("/")} alt="App logo" src="/logo512.png" w={30} h={30} /></Button>
 					<Flex justifyContent="right" w="full">
+						{/* LOGOUT FOR DEBUGGING */}
+						{user && <Button onClick={logout} m={2}>[testing]LOGOUT</Button>}
 						<Button onClick={handleBellClick} m={2}>ICON</Button>
 						<Button onClick={handleProfileClick} m={2}>PFP</Button>
 					</Flex>
