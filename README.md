@@ -40,6 +40,10 @@ _See Pivotal Tracker project for specifics on requirements and stories._
 2. Initialize the project's dependencies with `npm install`
 3. Run the development app with `npm start`
 
+**Spring Boot Server**
+1. Create env.properties file in src/main/resources/
+2. Add property `jsearch.api-key=` with value of a valid JSearch api key
+
 ### Docs
 **API(s) used**
 - Job Search Results: [JSearch](https://rapidapi.com/letscrape-6bRBa3QguO5/api/jsearch)
