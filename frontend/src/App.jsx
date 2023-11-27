@@ -4,7 +4,6 @@ import ErrorPage from "./routes/ErrorPage";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import LoginPage from "./routes/LoginPage";
 import { AuthContext } from "./context/AuthContext.tsx";
-import { useAuth } from "./hooks/useAuth.ts";
 import { useState } from "react";
 
 
