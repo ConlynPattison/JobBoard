@@ -1,34 +1,38 @@
 import React, { useState } from "react";
-import { SERVER_URL } from "../util/constants";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth.ts";
 
-const LoginPage = ({ setAuth }) => {
-	const [user, setUser] = useState({ username: "", password: "" });
+// TODO: Convert to a clean Chakra implementation
+const LoginPage = () => {
+	const [userCred, setUserCred] = useState({ username: "", password: "" });
 	const navigate = useNavigate();
+	const { login } = useAuth();
 
 	const onChange = (e) => {
-		setUser((prev) => {
+		setUserCred((prev) => {
 			return { ...prev, [e.target.name]: e.target.value };
 		});
 	};
 
-	const login = () => {
+	const submitLogin = () => {
 		// attempt login by sending request to Spring server with credentials object (user)
-		fetch(`${SERVER_URL}/login`, {
+		fetch('/api/login', {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify(user),
+			body: JSON.stringify(userCred),
 		})
 			.then((res) => {
 				const jwtToken = res.headers.get("Authorization");
-				console.log(jwtToken);
 				if (jwtToken != null) {
-					sessionStorage.setItem("token", jwtToken);
-					// setAuth(true);
+					login({
+						username: userCred.username,
+						email: "TODO:",
+						token: jwtToken
+					});
 					navigate("/");
 				}
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => console.error(err));
 	};
 
 	return (
@@ -44,7 +48,7 @@ const LoginPage = ({ setAuth }) => {
 								<input
 									type="text"
 									name="username"
-									value={user.username}
+									value={userCred.username}
 									onChange={onChange}
 								/>
 							</td>
@@ -57,7 +61,7 @@ const LoginPage = ({ setAuth }) => {
 								<input
 									type="password"
 									name="password"
-									value={user.password}
+									value={userCred.password}
 									onChange={onChange}
 								/>
 							</td>
@@ -66,7 +70,7 @@ const LoginPage = ({ setAuth }) => {
 				</table>
 
 				<br />
-				<button id="login-submit" onClick={login}>
+				<button id="login-submit" onClick={submitLogin}>
 					Login
 				</button>
 			</div>

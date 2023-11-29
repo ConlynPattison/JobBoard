@@ -39,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.authorizeRequests()
-				.antMatchers(HttpMethod.POST, "/login").permitAll()
+				.antMatchers(HttpMethod.POST, "/api/login").permitAll()
 				.antMatchers(HttpMethod.GET, "/h2-console/**",
 						"/favicon.ico",
 						"/", "/index.html", "/manifest.json",  "/*.png",
@@ -65,7 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		source.registerCorsConfiguration("/**", config);
 		return source;
-	}	
+	}
 
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth)
@@ -75,7 +75,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Bean
-	public AuthenticationManager getAuthenticationManager() throws 
+	public AuthenticationManager getAuthenticationManager() throws
 	Exception {
 		return authenticationManager();
 	}
