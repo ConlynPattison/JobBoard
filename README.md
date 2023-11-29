@@ -16,8 +16,8 @@
 ## Requirements:
 - [ ] REST backend using Spring Boot
   - [ ] Spring Boot JPA
-  - [ ] Spring Boot JWT Security
-  - [ ] Spring REST Template call to external REST service
+  - [x] Spring Boot JWT Security
+  - [x] Spring REST Template call to external REST service
 - [ ] Testing
   - [ ] JUnit test for each REST API method
   - [ ] Minimum of one End-to-End system test using Selenium
