@@ -5,5 +5,7 @@ public enum SavedListingState {
     APPLIED,
     ASSESSMENT,
     INTERVIEW,
-    OFFER
+    OFFER,
+    ACCEPTED,
+    REJECTED
 }
