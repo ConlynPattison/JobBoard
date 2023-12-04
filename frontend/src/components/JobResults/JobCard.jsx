@@ -11,8 +11,25 @@ import {
 	Image,
 } from "@chakra-ui/react";
 import React from "react";
+import axios from "axios";
 
-const JobCard = ({ jobData }) => {
+const JobCard = ({ jobData, isSaved, setSavedListing }) => {
+
+	const toggleSave = async () => {
+		setSavedListing((prev) => {
+			const savedListings = new Set(prev);
+			if (isSaved) {
+				savedListings.delete(jobData.job_id);
+				// TODO: add backend handling of being passed external ID to delete a SavedListing
+				// axios.delete("/api/saved/" + jobData.)
+			}
+			else {
+				savedListings.add(jobData.job_id);
+			}
+			return savedListings;
+		})
+	}
+
 	return (
 		<Card maxW="sm">
 			<CardBody>
@@ -47,6 +64,9 @@ const JobCard = ({ jobData }) => {
 						}}
 					>
 						Apply
+					</Button>
+					<Button onClick={toggleSave}>
+						{isSaved ? "Saved" : "Save"}
 					</Button>
 				</ButtonGroup>
 			</CardFooter>

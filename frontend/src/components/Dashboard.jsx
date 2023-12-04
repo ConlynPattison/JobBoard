@@ -16,21 +16,19 @@ const Dashboard = () => {
 	const { user } = useAuth();
 
 	useEffect(() => {
-		// TODO: Fetch the saved_listing table records for this user
+		fetchSavedListings();
+	}, [user, savedListings]);
 
-		// TODO: Set the savedListings set (holding only the listing_ids of this user)
-
-	}, [user]);
-
-	// TODO: finish after changing backend to respond with the external ids to compare with the jobResults job_id
 	const fetchSavedListings = async () => {
-		axios.get("/api/saved", {
+		if (!user)
+			return;
+		axios.get("/api/saved/details", {
 			headers: {
 				Authorization: user?.token || ""
 			}
 		}).then(({ data }) => {
-			// const listingIds = data.map(() => data.listing)
-			setSavedListings(() => new Set(data));
+			const listingIds = data.map((listingDetails) => listingDetails.externalId);
+			setSavedListings(() => new Set(listingIds));
 		}).catch((err) => {
 			console.error(err);
 		})
@@ -41,7 +39,7 @@ const Dashboard = () => {
 			<SearchPanel setResults={setJobResults} />
 			<Box flex="70%">
 				{jobResults.length > 0 ?
-					<ResultContainer jobResults={jobResults} savedListings={savedListings} /> : ""}
+					<ResultContainer jobResults={jobResults} savedListings={savedListings} setSavedListings={setSavedListings} /> : ""}
 			</Box>
 		</Flex>
 	</>;

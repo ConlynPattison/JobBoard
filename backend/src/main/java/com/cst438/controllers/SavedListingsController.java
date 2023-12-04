@@ -52,6 +52,7 @@ public class SavedListingsController {
         );
     }
 
+    // TODO: resolve enum issue
     @RequestMapping(value = "/api/saved/details", method = RequestMethod.GET)
     public StatefulListingDTO[] getAllSavedListings(Principal principal) {
         // TODO: authorize the user request
