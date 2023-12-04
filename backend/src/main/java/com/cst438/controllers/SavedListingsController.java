@@ -52,28 +52,29 @@ public class SavedListingsController {
         );
     }
 
-    // TODO: Change this behavior to respond with the details of each savedListing (ListingDTO & SavedState)[]
-    @RequestMapping(value = "/api/saved", method = RequestMethod.GET)
-    public SavedListingDTO[] getAllSavedListings(Principal principal) {
+    @RequestMapping(value = "/api/saved/details", method = RequestMethod.GET)
+    public StatefulListingDTO[] getAllSavedListings(Principal principal) {
         // TODO: authorize the user request
 
         // get all saved_listing entries with this user_id
         List<SavedListing> savedListings = savedListingRepository.findAllByUsername(principal.getName());
 
         // cast these saved_listing entries to DTO[] -> return this array
-        SavedListingDTO[] savedListingDTOs = new SavedListingDTO[savedListings.size()];
+        StatefulListingDTO[] statefulListingDTOs = new StatefulListingDTO[savedListings.size()];
 
         for (int i = 0; i < savedListings.size(); i++) {
             SavedListing savedListing = savedListings.get(i);
-            savedListingDTOs[i] = new SavedListingDTO(
-                    savedListing.getId(),
+            Listing listing = savedListing.getListing();
+            statefulListingDTOs[i] = new StatefulListingDTO(
+                    listing.getExternalId(),
                     savedListing.getState(),
-                    savedListing.getUser().getId(),
-                    savedListing.getListing().getId()
+                    listing.getJobTitle(),
+                    listing.getCompanyLogoUrl(),
+                    listing.getApplicationUrl()
             );
         }
 
-        return savedListingDTOs;
+        return statefulListingDTOs;
     }
 
     @RequestMapping(value = "/api/saved", method = RequestMethod.POST)
