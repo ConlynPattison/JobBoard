@@ -10,6 +10,7 @@ create table user_table
 create table listing
 (
     id               int NOT NULL AUTO_INCREMENT,
+    external_id      varchar(255) unique,
     job_title        varchar(255) DEFAULT NULL,
     company_logo_url varchar(255) DEFAULT NULL,
     application_url  varchar(255) DEFAULT NULL,

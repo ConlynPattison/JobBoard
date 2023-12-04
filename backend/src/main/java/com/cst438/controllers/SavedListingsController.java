@@ -84,14 +84,14 @@ public class SavedListingsController {
         Listing listing = new Listing();
 
         // check if the listing exists in the db already -> create it if not
-        if (!listingRepository.existsById(listingDTO.id())) {
+        if (listingRepository.findByExternalId(listingDTO.externalId()) == null) {
             listing.setApplicationUrl(listingDTO.applicationUrl());
             listing.setCompanyLogoUrl(listingDTO.companyLogoUrl());
             listing.setJobTitle(listingDTO.jobTitle());
 
             listing = listingRepository.save(listing);
         } else
-            listing = listingRepository.findById(listingDTO.id()).orElseThrow();
+            listing = listingRepository.findByExternalId(listingDTO.externalId());
 
         SavedListing savedListing = savedListingRepository.findByUsernameAndListingId(
                 principal.getName(),

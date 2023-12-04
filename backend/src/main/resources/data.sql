@@ -5,9 +5,9 @@ insert into user_table
 ;
 
 insert into listing
-(id, job_title, company_logo_url, application_url) values
-(1, 'google engineer', 'google.com', 'youtube.com'),
-(2, 'facebook engineer', 'facebook.com', 'twitter.com')
+(id, external_id, job_title, company_logo_url, application_url) values
+(1, 'fgsdfjhs', 'google engineer', 'google.com', 'youtube.com'),
+(2, 'sadgsagh', 'facebook engineer', 'facebook.com', 'twitter.com')
 ;
 
 insert into saved_listing

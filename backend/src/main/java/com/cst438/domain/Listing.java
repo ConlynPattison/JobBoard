@@ -11,6 +11,7 @@ public class Listing {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    private String externalId;
     private String jobTitle;
     private String companyLogoUrl;
     private String applicationUrl;
@@ -46,11 +47,19 @@ public class Listing {
     public void setApplicationUrl(String applicationUrl) {
         this.applicationUrl = applicationUrl;
     }
+    public String getExternalId() {
+        return externalId;
+    }
+
+    public void setExternalId(String externalId) {
+        this.externalId = externalId;
+    }
 
     @Override
     public String toString() {
         return "Listing{" +
                 "id=" + id +
+                ", externalId='" + externalId + '\'' +
                 ", jobTitle='" + jobTitle + '\'' +
                 ", companyLogoUrl='" + companyLogoUrl + '\'' +
                 ", applicationUrl='" + applicationUrl + '\'' +
