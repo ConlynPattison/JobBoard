@@ -52,6 +52,7 @@ public class SavedListingsController {
         );
     }
 
+    // TODO: Change this behavior to respond with the details of each savedListing (ListingDTO & SavedState)[]
     @RequestMapping(value = "/api/saved", method = RequestMethod.GET)
     public SavedListingDTO[] getAllSavedListings(Principal principal) {
         // TODO: authorize the user request
