@@ -51,6 +51,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.authenticationEntryPoint(exceptionHandler).and()
 				.addFilterBefore(authenticationFilter,
 						UsernamePasswordAuthenticationFilter.class);
+		/* FIXME: */ http.headers().frameOptions().sameOrigin();
+		/* FIXME: */ http.headers().httpStrictTransportSecurity().disable();
 	}
 
 	@Bean
