@@ -16,6 +16,7 @@ public class SavedListing {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Column(columnDefinition = "ENUM('SAVED', 'APPLIED', 'ASSESSMENT', 'INTERVIEW', 'OFFER', 'ACCEPTED', 'REJECTED')")
     @Enumerated(EnumType.STRING)
     private SavedListingState state;
 

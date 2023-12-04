@@ -12,6 +12,6 @@ insert into listing
 
 insert into saved_listing
 (id, listing_id, user_id, state) values
-(1, 2, 1, 'applied'),
-(2, 1, 1, 'assessment')
+(1, 2, 1, 'APPLIED'),
+(2, 1, 1, 'ASSESSMENT')
 ;

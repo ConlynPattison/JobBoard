@@ -22,7 +22,7 @@ create table saved_listing
     id         int NOT NULL AUTO_INCREMENT,
     listing_id int DEFAULT null,
     user_id    int DEFAULT null,
-    state      enum ('saved', 'applied', 'assessment', 'interview', 'offer', 'accepted', 'rejected') not null,
+    state      enum ('SAVED', 'APPLIED', 'ASSESSMENT', 'INTERVIEW', 'OFFER', 'ACCEPTED', 'REJECTED') not null,
     PRIMARY KEY (id),
     FOREIGN KEY (listing_id) REFERENCES listing (id) on delete cascade,
     FOREIGN KEY (user_id) REFERENCES user_table (id) on delete cascade

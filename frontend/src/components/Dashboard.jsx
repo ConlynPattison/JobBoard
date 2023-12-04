@@ -17,7 +17,7 @@ const Dashboard = () => {
 
 	useEffect(() => {
 		fetchSavedListings();
-	}, [user, savedListings]);
+	}, [user]);
 
 	const fetchSavedListings = async () => {
 		if (!user)
