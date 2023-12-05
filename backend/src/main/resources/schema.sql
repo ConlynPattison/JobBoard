@@ -10,6 +10,7 @@ create table user_table
 create table listing
 (
     id               int NOT NULL AUTO_INCREMENT,
+    external_id      varchar(255) unique,
     job_title        varchar(255) DEFAULT NULL,
     company_logo_url varchar(255) DEFAULT NULL,
     application_url  varchar(255) DEFAULT NULL,
@@ -21,7 +22,7 @@ create table saved_listing
     id         int NOT NULL AUTO_INCREMENT,
     listing_id int DEFAULT null,
     user_id    int DEFAULT null,
-    state      enum ('saved', 'applied') not null,
+    state      enum ('SAVED', 'APPLIED', 'ASSESSMENT', 'INTERVIEW', 'OFFER', 'ACCEPTED', 'REJECTED') not null,
     PRIMARY KEY (id),
     FOREIGN KEY (listing_id) REFERENCES listing (id) on delete cascade,
     FOREIGN KEY (user_id) REFERENCES user_table (id) on delete cascade
