@@ -110,24 +110,54 @@ public class SavedListingsControllerUnitTests {
 
     @Test
     public void updateSavedListing() throws Exception {
-        // create a listing
+        // create a SavedListing with this listing and user
+        String jwt = jwtService.getToken("test");
+        User testUser = userRepository.findByUsername("test");
+        Listing listing = new Listing();
+        SavedListing savedListing = new SavedListing();
 
-        // create a SavedListing
+        savedListing.setUser(testUser);
+        savedListing.setState(SavedListingState.SAVED);
+        savedListing.setListing(listing);
+        listingRepository.save(listing);
+        savedListing = savedListingRepository.save(savedListing);
+        SavedListingState state = SavedListingState.REJECTED;
 
         // call the mvc to update the value of the SavedListing state
+        response = mvc.perform(MockMvcRequestBuilders
+                        .patch("/api/saved/" + savedListing.getId())
+                        .header("Authorization", jwt)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(asJsonString(state)))
+                .andReturn()
+                .getResponse();
 
         // assert that the call was successful
+        assertEquals(200, response.getStatus());
 
         // assert that the SavedListing state was changed properly
+        assertEquals(savedListingRepository.findById(savedListing.getId())
+                        .orElse(new SavedListing())
+                        .getState(),
+                SavedListingState.REJECTED);
 
         // remove the SavedListing
+        savedListingRepository.delete(savedListing);
     }
 
     @Test
     public void removeSavedListingExternal() throws Exception {
-        // create a listing
+        // create a SavedListing with this listing and user
+        String jwt = jwtService.getToken("test");
+        User testUser = userRepository.findByUsername("test");
+        Listing listing = new Listing();
+        SavedListing savedListing = new SavedListing();
 
-        // create a SavedListing
+        savedListing.setUser(testUser);
+        savedListing.setState(SavedListingState.SAVED);
+        savedListing.setListing(listing);
+        listingRepository.save(listing);
+        savedListing = savedListingRepository.save(savedListing);
 
         // call the mvc to remove the SavedListing with the externalId
 
