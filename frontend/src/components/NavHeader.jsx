@@ -14,6 +14,7 @@ const NavHeaders = () => {
 			navigate("/login");
 		} else {
 			// TODO: show the modal with suggested job listings
+			navigate("/profile");
 		}
 	}
 
