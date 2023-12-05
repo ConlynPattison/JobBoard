@@ -25,6 +25,7 @@ const NavHeaders = () => {
 			navigate("/login");
 		} else {
 			// TODO: show the modal with profile information and sign-out button
+			navigate("/profile");
 		}
 	}
 
@@ -34,10 +35,9 @@ const NavHeaders = () => {
 				<Flex alignItems="center" w="full">
 					<Button><Image onClick={() => navigate("/")} alt="App logo" src="/logo512.png" w={30} h={30} /></Button>
 					<Flex justifyContent="right" w="full">
-						{/* LOGOUT FOR DEBUGGING */}
-						{user && <Button onClick={logout} m={2}>[testing]LOGOUT</Button>}
-						<Button onClick={handleBellClick} m={2}>ICON</Button>
-						<Button onClick={handleProfileClick} m={2}>PFP</Button>
+						{user && <Button onClick={logout} m={2}> Logout </Button>}
+						<Button onClick={handleBellClick} m={2}><Image w={30} h={30} src="https://cdn-icons-png.flaticon.com/512/5035/5035563.png" alt="" /></Button>
+						<Button onClick={handleProfileClick} m={2}><Image w={30} h={30} src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="PFP" /></Button>
 						<Button onClick={toggleColorMode} m={2}><img height={20} width={20} src={colorMode === 'light' ? 'darkmode.png' : 'lightmode.png'}></img></Button>
 					</Flex>
 				</Flex>
