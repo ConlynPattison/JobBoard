@@ -1,4 +1,4 @@
-import { Image, Button, Box, Flex, Divider } from "@chakra-ui/react"
+import { Image, Button, Box, Flex, Divider, useColorMode, useColorModeValue } from "@chakra-ui/react"
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth.ts";
@@ -8,6 +8,9 @@ import { useAuth } from "../hooks/useAuth.ts";
 const NavHeaders = () => {
 	const navigate = useNavigate();
 	const { user, logout } = useAuth();
+	const { colorMode, toggleColorMode } = useColorMode()
+	const bg = useColorModeValue('red.500', 'red.200');
+	const color = useColorModeValue('white', 'gray.800');
 
 	const handleBellClick = () => {
 		if (!user) {
@@ -35,6 +38,7 @@ const NavHeaders = () => {
 						{user && <Button onClick={logout} m={2}>[testing]LOGOUT</Button>}
 						<Button onClick={handleBellClick} m={2}>ICON</Button>
 						<Button onClick={handleProfileClick} m={2}>PFP</Button>
+						<Button onClick={toggleColorMode} m={2}><img height={20} width={20} src={colorMode === 'light' ? 'darkmode.png' : 'lightmode.png'}></img></Button>
 					</Flex>
 				</Flex>
 			</Box>
