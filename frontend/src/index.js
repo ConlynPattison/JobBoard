@@ -1,4 +1,4 @@
-
+import React from "react";
 import { ColorModeScript } from '@chakra-ui/react'
 import * as ReactDOM from 'react-dom/client'
 import App from './App'
@@ -10,4 +10,4 @@ ReactDOM.createRoot(rootElement).render(
     <ColorModeScript initialColorMode={theme.config.initialColorMode} />
     <App />
   </>,
-)
+);
