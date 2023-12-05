@@ -5,13 +5,13 @@ insert into user_table
 ;
 
 insert into listing
-(id, external_id, job_title, company_logo_url, application_url) values
-(1, 'fgsdfjhs', 'google engineer', 'google.com', 'youtube.com'),
-(2, 'sadgsagh', 'facebook engineer', 'facebook.com', 'twitter.com')
+(external_id, job_title, company_logo_url, application_url) values
+('fgsdfjhs', 'google engineer', 'google.com', 'youtube.com'),
+('sadgsagh', 'facebook engineer', 'facebook.com', 'twitter.com')
 ;
 
 insert into saved_listing
-(id, listing_id, user_id, state) values
-(1, 2, 1, 'APPLIED'),
-(2, 1, 1, 'ASSESSMENT')
+(listing_id, user_id, state) values
+(2, 1, 'APPLIED'),
+(1, 1, 'ASSESSMENT')
 ;

@@ -15,4 +15,9 @@ public interface SavedListingRepository extends CrudRepository<SavedListing, Int
     SavedListing findByUsernameAndListingId(
             @Param("username") String username,
             @Param("listing_id") Integer listingId);
+
+    @Query("select a from SavedListing a where a.user.username= :username and a.listing.externalId= :external_id")
+    SavedListing findByUsernameAndExternalId(
+            @Param("username") String username,
+            @Param("external_id") String externalId);
 }

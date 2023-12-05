@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.transaction.Transactional;
 import java.security.Principal;
 import java.util.List;
 
@@ -80,7 +81,6 @@ public class SavedListingsController {
 
     @RequestMapping(value = "/api/saved", method = RequestMethod.POST)
     public int createSavedListing(Principal principal,
-                                  @RequestBody SavedListingDTO savedListingDTO,
                                   @RequestBody ListingDTO listingDTO) {
         // TODO: authorize the user request
 
@@ -88,6 +88,7 @@ public class SavedListingsController {
 
         // check if the listing exists in the db already -> create it if not
         if (listingRepository.findByExternalId(listingDTO.externalId()) == null) {
+            listing.setExternalId(listingDTO.externalId());
             listing.setApplicationUrl(listingDTO.applicationUrl());
             listing.setCompanyLogoUrl(listingDTO.companyLogoUrl());
             listing.setJobTitle(listingDTO.jobTitle());
@@ -96,9 +97,9 @@ public class SavedListingsController {
         } else
             listing = listingRepository.findByExternalId(listingDTO.externalId());
 
-        SavedListing savedListing = savedListingRepository.findByUsernameAndListingId(
+        SavedListing savedListing = savedListingRepository.findByUsernameAndExternalId(
                 principal.getName(),
-                listing.getId());
+                listing.getExternalId());
 
         // check if the user has already saved this listing -> exit request if so
         if (savedListing != null)
@@ -112,7 +113,7 @@ public class SavedListingsController {
         // create the saved_listing record -> return the id
         savedListing = new SavedListing();
         savedListing.setListing(listing);
-        savedListing.setState(savedListingDTO.state());
+        savedListing.setState(SavedListingState.SAVED);
         savedListing.setUser(userRepository.findByUsername(principal.getName()));
         savedListing = savedListingRepository.save(savedListing);
 
@@ -140,6 +141,7 @@ public class SavedListingsController {
     }
 
     @RequestMapping(value = "/api/saved/{id}", method = RequestMethod.DELETE)
+    @Transactional
     public void removeSavedListing(Principal principal,
                                    @PathVariable Integer id) {
         // TODO: authorize the user request
@@ -161,5 +163,28 @@ public class SavedListingsController {
 
         // delete the saved_listing
         savedListingRepository.deleteById(id);
+    }
+
+    // Try a DELETE using an external job_id from external web api rather than db id
+    @RequestMapping(value = "/api/saved/external/{id}", method = RequestMethod.DELETE)
+    @Transactional
+    public void removeSavedListingExternal(Principal principal,
+                                           @PathVariable String id) {
+        // TODO: authorize the user request
+
+        // check that the saved_listing belongs to this user -> respond with error if not
+        SavedListing savedListing = savedListingRepository.findByUsernameAndExternalId(principal.getName(), id);
+        if (savedListing == null)
+            return;
+
+        if (!savedListing.getUser().getUsername().equals(principal.getName()))
+            throw new ResponseStatusException(
+                    HttpStatus.UNAUTHORIZED,
+                    "SavedListing of external id" + id +
+                            " does not belong to username " + principal.getName()
+            );
+
+        // delete the saved_listing
+        savedListingRepository.delete(savedListing);
     }
 }
