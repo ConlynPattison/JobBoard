@@ -153,6 +153,8 @@ public class SavedListingsControllerUnitTests {
         Listing listing = new Listing();
         SavedListing savedListing = new SavedListing();
 
+        listing.setExternalId("external");
+
         savedListing.setUser(testUser);
         savedListing.setState(SavedListingState.SAVED);
         savedListing.setListing(listing);
@@ -160,11 +162,16 @@ public class SavedListingsControllerUnitTests {
         savedListing = savedListingRepository.save(savedListing);
 
         // call the mvc to remove the SavedListing with the externalId
+        response = mvc.perform(MockMvcRequestBuilders
+                        .delete("/api/saved/external/" + listing.getExternalId())
+                        .header("Authorization", jwt))
+                .andReturn()
+                .getResponse();
 
         // assert that the call was successful
+        assertEquals(200, response.getStatus());
 
         // assert that the SavedListing was removed
-
-        // remove the listing
+        assertNull(savedListingRepository.findById(savedListing.getId()).orElse(null));
     }
 }
