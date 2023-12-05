@@ -3,7 +3,6 @@ import HomePage from "./routes/HomePage";
 import ErrorPage from "./routes/ErrorPage";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import LoginPage from "./routes/LoginPage";
-import ProfilePage from "./routes/ProfilePage";
 import { AuthContext } from "./context/AuthContext.tsx";
 import { useState } from "react";
 
@@ -17,10 +16,6 @@ const router = createBrowserRouter([
 	{
 		path: "login",
 		element: <LoginPage />
-	},
-	{
-		path: "profile",
-		element: <ProfilePage />
 	}
 ]);
 
