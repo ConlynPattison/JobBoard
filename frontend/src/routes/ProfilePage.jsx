@@ -1,6 +1,6 @@
 import NavHeaders from "../components/NavHeader";
 import React, { useEffect, useState } from "react";
-import { Button, Card, CardBody, Image, Table, Text } from "@chakra-ui/react";
+import {Button, Card, CardBody, Image, Table, TableContainer, Text} from "@chakra-ui/react";
 import { Center } from "@chakra-ui/layout";
 import { useAuth } from "../hooks/useAuth.ts";
 import axios from "axios";
@@ -50,18 +50,23 @@ const ProfilePage = () => {
 				/>
 			</Center>
 			<br />
-			<Center> <Text fontSize='3xl'> Conlyn Pattison </Text> </Center>
+			<Center> <Text fontSize='3xl'> {user.username} </Text> </Center>
 			<br />
+
+			<Center>
 			<Card>
 				<CardBody>
-					<Table>
+					<TableContainer>
+					<Table variant='simple' style={{borderCollapse:"separate", borderSpacing:"15px"}}>
 						{savedListings.map((listingDetails) => (
 							<tr>
+                                <td>
+                                    <Image boxSize='50px' src={listingDetails.companyLogoUrl} fallbackSrc='logo512.png' alt='logo' />
+                                </td>
 								<td>
-									{listingDetails.jobTitle}
-								</td>
-								<td>
-									<Image boxSize='30px' src={listingDetails.companyLogoUrl} alt='Company Logo' />
+									<Text noOfLines={1} >
+										{listingDetails.jobTitle}
+									</Text>
 								</td>
 								<td>
 									<Button
@@ -87,8 +92,11 @@ const ProfilePage = () => {
 						))}
 
 					</Table>
+					</TableContainer>
 				</CardBody>
 			</Card>
+			</Center>
+
 		</>
 	);
 }
