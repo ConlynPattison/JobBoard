@@ -11,7 +11,6 @@ import {
 	Image,
 } from "@chakra-ui/react";
 import React from "react";
-import axios from "axios";
 import { useAuth } from "../../hooks/useAuth.ts";
 
 const JobCard = ({ jobData, isSaved, setSavedListing }) => {
