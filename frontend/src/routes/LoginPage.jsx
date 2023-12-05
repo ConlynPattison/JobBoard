@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth.ts";
+import {Button, Card, CardBody, Center, Image, Input, Text} from "@chakra-ui/react";
 
 // TODO: Convert to a clean Chakra implementation
 const LoginPage = () => {
@@ -38,41 +39,60 @@ const LoginPage = () => {
 	return (
 		<>
 			<div className="App">
-				<table>
-					<tbody>
-						<tr>
-							<td>
-								<label htmlFor="username">Username</label>
-							</td>
-							<td>
-								<input
-									type="text"
-									name="username"
-									value={userCred.username}
-									onChange={onChange}
-								/>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<label htmlFor="password">Password</label>
-							</td>
-							<td>
-								<input
-									type="password"
-									name="password"
-									value={userCred.password}
-									onChange={onChange}
-								/>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+
+				<br/>
+
+				<Center> <Image boxSize='100px' alt="App logo" src="/logo512.png" /> </Center>
+				<br />
+
+				<Center> <Text fontSize='3xl'> Sign into your JobSearch Account </Text> </Center>
+				<br />
+
+				<Center>
+					<Card>
+						<CardBody>
+							<table>
+								<tbody>
+									<tr>
+										<td>
+											<label htmlFor="username">Username</label>
+										</td>
+										<td>
+											<Input
+												variant="filled"
+												type="text"
+												name="username"
+												value={userCred.username}
+												onChange={onChange}
+											/>
+										</td>
+									</tr>
+									<tr>
+										<td>
+											<label htmlFor="password">Password</label>
+										</td>
+										<td>
+											<Input
+												variant="filled"
+												type="password"
+												name="password"
+												value={userCred.password}
+												onChange={onChange}
+											/>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</CardBody>
+					</Card>
+				</Center>
 
 				<br />
-				<button id="login-submit" onClick={submitLogin}>
-					Login
-				</button>
+				<Center>
+					<Button colorScheme='green' size='md' id="login-submit" onClick={submitLogin}>
+						Login
+					</Button>
+				</Center>
 			</div>
 		</>
 	);
