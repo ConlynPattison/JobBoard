@@ -14,14 +14,14 @@
 </div>
 
 ## Requirements:
-- [ ] REST backend using Spring Boot
-  - [ ] Spring Boot JPA
+- [x] REST backend using Spring Boot
+  - [x] Spring Boot JPA
   - [x] Spring Boot JWT Security
   - [x] Spring REST Template call to external REST service
 - [ ] Testing
   - [ ] JUnit test for each REST API method
   - [ ] Minimum of one End-to-End system test using Selenium
-- [ ] React front end
+- [x] React front end
 - [ ] Deployed to AWS
 
 _See Pivotal Tracker project for specifics on requirements and stories._
