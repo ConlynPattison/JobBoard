@@ -14,7 +14,6 @@ const NavHeaders = () => {
 			navigate("/login");
 		} else {
 			// TODO: show the modal with suggested job listings
-			navigate("/profile");
 		}
 	}
 
@@ -22,7 +21,7 @@ const NavHeaders = () => {
 		if (!user) {
 			navigate("/login");
 		} else {
-			// TODO: show the modal with profile information and sign-out button
+			navigate("/profile");
 		}
 	}
 
