@@ -2,8 +2,8 @@ import { ChakraProvider } from "@chakra-ui/react";
 import HomePage from "./routes/HomePage";
 import ErrorPage from "./routes/ErrorPage";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import LoginPage from "./routes/LoginPage";
 import ProfilePage from "./routes/ProfilePage";
+import LoginPage from "./routes/LoginPage";
 import { AuthContext } from "./context/AuthContext.tsx";
 import { useState } from "react";
 

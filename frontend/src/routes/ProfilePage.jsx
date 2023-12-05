@@ -1,6 +1,6 @@
 import NavHeaders from "../components/NavHeader";
 import React, { useEffect, useState } from "react";
-import {Button, Card, CardBody, Image, Table, TableContainer, Text} from "@chakra-ui/react";
+import { Button, Card, CardBody, Image, Table, TableContainer, Text } from "@chakra-ui/react";
 import { Center } from "@chakra-ui/layout";
 import { useAuth } from "../hooks/useAuth.ts";
 import axios from "axios";
@@ -54,47 +54,47 @@ const ProfilePage = () => {
 			<br />
 
 			<Center>
-			<Card>
-				<CardBody>
-					<TableContainer>
-					<Table variant='simple' style={{borderCollapse:"separate", borderSpacing:"15px"}}>
-						{savedListings.map((listingDetails) => (
-							<tr>
-                                <td>
-                                    <Image boxSize='50px' src={listingDetails.companyLogoUrl} fallbackSrc='logo512.png' alt='logo' />
-                                </td>
-								<td>
-									<Text noOfLines={1} >
-										{listingDetails.jobTitle}
-									</Text>
-								</td>
-								<td>
-									<Button
-										variant="solid"
-										colorScheme="blue"
-										onClick={() => {
-											window.open(listingDetails.applicationUrl);
-										}}
-									>
-										Apply
-									</Button>
-								</td>
-								<td>
-									<Button
-										variant="solid"
-										colorScheme="red"
-										onClick={() => removeListing(listingDetails.externalId)}
-									>
-										Remove
-									</Button>
-								</td>
-							</tr>
-						))}
+				<Card>
+					<CardBody>
+						<TableContainer>
+							<Table variant='simple' style={{ borderCollapse: "separate", borderSpacing: "15px" }}>
+								{savedListings.map((listingDetails) => (
+									<tr>
+										<td>
+											<Image boxSize='50px' src={listingDetails.companyLogoUrl} fallbackSrc='logo512.png' alt='logo' />
+										</td>
+										<td>
+											<Text noOfLines={1} >
+												{listingDetails.jobTitle}
+											</Text>
+										</td>
+										<td>
+											<Button
+												variant="solid"
+												colorScheme="blue"
+												onClick={() => {
+													window.open(listingDetails.applicationUrl);
+												}}
+											>
+												Apply
+											</Button>
+										</td>
+										<td>
+											<Button
+												variant="solid"
+												colorScheme="red"
+												onClick={() => removeListing(listingDetails.externalId)}
+											>
+												Remove
+											</Button>
+										</td>
+									</tr>
+								))}
 
-					</Table>
-					</TableContainer>
-				</CardBody>
-			</Card>
+							</Table>
+						</TableContainer>
+					</CardBody>
+				</Card>
 			</Center>
 
 		</>
