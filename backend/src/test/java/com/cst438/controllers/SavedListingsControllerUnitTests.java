@@ -98,10 +98,14 @@ public class SavedListingsControllerUnitTests {
                 .getResponse();
 
         // assert that the call was successful
+        assertEquals(200, response.getStatus());
 
         // assert that returned id is not null
+        Integer id = fromJsonString(response.getContentAsString(), Integer.class);
+        assertNotNull(id);
 
         // remove the SavedListing
+        savedListingRepository.deleteById(id);
     }
 
     @Test
