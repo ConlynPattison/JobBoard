@@ -2,11 +2,11 @@ import NavHeaders from "../components/NavHeader";
 import React from "react";
 import {Card, CardBody, Image, Text} from "@chakra-ui/react";
 import {Center} from "@chakra-ui/layout";
-// import {useAuth} from "../hooks/useAuth";
+import {useAuth} from "../hooks/useAuth";
 
 
 const ProfilePage = () => {
-    // const { user, logout } = useAuth();
+    const { user, logout } = useAuth();
 
     return (
         <>
