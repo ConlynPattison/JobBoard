@@ -4,13 +4,19 @@ import { Button, Card, CardBody, Image, Table, TableContainer, Text } from "@cha
 import { Center } from "@chakra-ui/layout";
 import { useAuth } from "../hooks/useAuth.ts";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 const ProfilePage = () => {
 	const { user } = useAuth();
 	const [savedListings, setSavedListings] = useState([]);
+	const navigate = useNavigate();
 
 	useEffect(() => {
+		if (!user) {
+			navigate("/");
+			return;
+		}
 		fetchSavedListings();
 	}, [user])
 
@@ -50,7 +56,7 @@ const ProfilePage = () => {
 				/>
 			</Center>
 			<br />
-			<Center> <Text fontSize='3xl'> {user.username} </Text> </Center>
+			<Center> <Text fontSize='3xl'> {user?.username || ""} </Text> </Center>
 			<br />
 
 			<Center>

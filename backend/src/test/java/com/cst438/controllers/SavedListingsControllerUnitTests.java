@@ -11,7 +11,7 @@ import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static com.cst438.TestUtils.*;
+import static com.cst438.utils.TestUtils.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
