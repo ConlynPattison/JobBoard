@@ -1,4 +1,4 @@
-# JobBoard - SWE Final Project
+# Job Search Engine Application - SWE Final Project
 
 <div>
   <img src="https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E" />
@@ -49,8 +49,8 @@ _See Pivotal Tracker project for specifics on requirements and stories._
 - Job Search Results: [JSearch](https://rapidapi.com/letscrape-6bRBa3QguO5/api/jsearch)
 
 ## Contributors
-- Randy Rodriguez
 - Conlyn Pattison
+- Marc Garcia
 - Dale Sanchez
 - Integra Diaz
-- Marc Garcia
+- Randy Rodriguez
