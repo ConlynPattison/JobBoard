@@ -14,7 +14,7 @@ const ProfilePage = () => {
 
 	useEffect(() => {
 		if (!user) {
-			navigate("/");
+			navigate("/login");
 			return;
 		}
 		fetchSavedListings();

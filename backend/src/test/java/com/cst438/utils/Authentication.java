@@ -2,6 +2,7 @@ package com.cst438.utils;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,6 +16,7 @@ public class Authentication {
                 .sendKeys(testUsername);
         driver.findElement(By.xpath("//input[@name='password']"))
                 .sendKeys(testPassword);
-        driver.findElement(By.id("login-submit")).click();
+        WebElement el = driver.findElement(By.id("login-submit"));
+        el.click();
     }
 }

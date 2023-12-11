@@ -37,7 +37,7 @@ const NavHeaders = () => {
 					<Flex justifyContent="right" w="full">
 						{user && <Button onClick={logout} m={2}> Logout </Button>}
 						<Button onClick={handleBellClick} m={2}><Image w={30} h={30} src="https://cdn-icons-png.flaticon.com/512/5035/5035563.png" alt="" /></Button>
-						<Button onClick={handleProfileClick} m={2}><Image w={30} h={30} src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="PFP" /></Button>
+						<Button id="profile-button" onClick={handleProfileClick} m={2}><Image w={30} h={30} src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="PFP" /></Button>
 						<Button onClick={toggleColorMode} m={2}><img height={20} width={20} src={colorMode === 'light' ? 'darkmode.png' : 'lightmode.png'}></img></Button>
 					</Flex>
 				</Flex>

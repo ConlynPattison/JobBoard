@@ -4,10 +4,10 @@ import com.cst438.domain.*;
 import com.cst438.utils.Authentication;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 @AutoConfigureMockMvc
 public class SavedListingsEndToEndTests {
-    public static final String CHROME_DRIVER_FILE_LOCATION = "/Users/conlynpattison/Desktop/chromedriver";
+    public static final String CHROME_DRIVER_FILE_LOCATION = "C:\\Users\\conly\\OneDrive\\Desktop\\chromedriver.exe";
     public static final String URL = "http://localhost:3000";
     public static final int SLEEP_DURATION = 1000; // 1 second.
 
@@ -39,9 +39,12 @@ public class SavedListingsEndToEndTests {
     @Test
     public void addSavedListingTest() throws Exception {
         System.setProperty("webdriver.chrome.driver", CHROME_DRIVER_FILE_LOCATION);
-        WebDriver driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        WebDriver driver = new ChromeDriver(options);
         // Puts an Implicit wait for 10 seconds before throwing exception
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
 
         driver.get(URL);
         Thread.sleep(SLEEP_DURATION);
@@ -62,7 +65,7 @@ public class SavedListingsEndToEndTests {
             savedListingA = savedListingRepository.save(savedListingA);
 
             // navigate to login
-            driver.navigate().to("/login");
+            driver.navigate().to(URL + "/login");
             Thread.sleep(SLEEP_DURATION);
 
             // login the webdriver with test account
@@ -70,7 +73,7 @@ public class SavedListingsEndToEndTests {
             Thread.sleep(SLEEP_DURATION);
 
             // navigate to the profile page
-            driver.navigate().to("/profile");
+            driver.findElement(By.id("profile-button")).click();
             Thread.sleep(SLEEP_DURATION);
 
             // grab the list of saved listings found on the profile page
