@@ -20,7 +20,7 @@
   - [x] Spring REST Template call to external REST service
 - [ ] Testing
   - [x] JUnit test for each REST API method
-  - [ ] Minimum of one End-to-End system test using Selenium
+  - [x] Minimum of one End-to-End system test using Selenium
 - [x] React front end
 - [ ] Deployed to AWS
 
