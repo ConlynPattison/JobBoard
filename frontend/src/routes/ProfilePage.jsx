@@ -65,7 +65,7 @@ const ProfilePage = () => {
 						<TableContainer>
 							<Table variant='simple' style={{ borderCollapse: "separate", borderSpacing: "15px" }}>
 								{savedListings.map((listingDetails) => (
-									<tr>
+									<tr key={listingDetails.externalId}>
 										<td>
 											<Image boxSize='50px' src={listingDetails.companyLogoUrl} fallbackSrc='logo512.png' alt='logo' />
 										</td>
