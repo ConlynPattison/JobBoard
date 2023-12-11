@@ -1,4 +1,4 @@
-package com.cst438;
+package com.cst438.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
