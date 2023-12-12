@@ -22,7 +22,7 @@
   - [x] JUnit test for each REST API method
   - [x] Minimum of one End-to-End system test using Selenium
 - [x] React front end
-- [ ] Deployed to AWS
+- [x] Deployed to AWS
 
 _See Pivotal Tracker project for specifics on requirements and stories._
 
